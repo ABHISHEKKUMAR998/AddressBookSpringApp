@@ -2,6 +2,10 @@ package com.example.AddressBookSpringApp.Model;
 
 import com.example.AddressBookSpringApp.DTO.AddressBookDTO;
 
+
+import lombok.Data;
+
+@Data
 public class AddressBookData {
 
 	private int addressBookId;
@@ -15,32 +19,4 @@ public class AddressBookData {
 		this.address = addressBookDTO.address;
 	}
 
-	public AddressBookData() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public int getaddressBookId() {
-		return addressBookId;
-	}
-
-	public void setaddressBookId(int addressBookId) {
-		this.addressBookId = addressBookId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
 }
