@@ -1,20 +1,29 @@
 package com.example.AddressBookSpringApp.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.example.AddressBookSpringApp.DTO.AddressBookDTO;
 
 
 import lombok.Data;
 
-@Data
-public class AddressBookData {
+@Entity
+@Table(name = "AddressBook")
+ public @Data class AddressBookData {
 
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.AUTO)
 	private int addressBookId;
 	private String name;
 	private String address;
 
-	public AddressBookData(int addressBookId, AddressBookDTO addressBookDTO) {
+	public AddressBookData( AddressBookDTO addressBookDTO) {
+
 		super();
-		this.addressBookId = addressBookId;
 		this.name = addressBookDTO.name;
 		this.address = addressBookDTO.address;
 	}

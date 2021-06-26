@@ -3,45 +3,53 @@ package com.example.AddressBookSpringApp.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.AddressBookSpringApp.DTO.AddressBookDTO;
+import com.example.AddressBookSpringApp.Exception.AddressBookException;
 import com.example.AddressBookSpringApp.Model.AddressBookData;
+import com.example.AddressBookSpringApp.repository.AddressBookRepository;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class AddressBookService implements IAddressBookService {
-	private List<AddressBookData> addressBookList = new ArrayList<>();
+	@Autowired
+	private AddressBookRepository addressBookData;
 
 	@Override
 	public List<AddressBookData> getAddressBookData() {
-		return addressBookList;
+		return addressBookData.findAll();
 	}
 
 	@Override
 	public AddressBookData getAddressBookDataById(int personId) {
-		return addressBookList.get(personId - 1);
+		return addressBookData
+				.findById(personId)
+				.orElseThrow(() ->new AddressBookException("No Contact Found"));
 	}
 
 	@Override
 	public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO) {
-		AddressBookData addressBookData = null;
-		addressBookData = new AddressBookData(addressBookList.size() + 1, addressBookDTO);
-		addressBookList.add(addressBookData);
-		return addressBookData;
+		AddressBookData addressData =	new AddressBookData( addressBookDTO);
+		log.debug("Address Data",addressData.toString());
+			return addressBookData.save(addressData);
 	}
 
 	@Override
 	public AddressBookData updateAddressBookData(int personId, AddressBookDTO addressBookDTO) {
-		AddressBookData addressBookData = this.getAddressBookDataById(personId);
-		addressBookData.setName(addressBookDTO.name);
-		addressBookData.setAddress(addressBookDTO.address);
-		addressBookList.set(personId - 1, addressBookData);
-		return addressBookData;
+		AddressBookData addressBook = this.getAddressBookDataById(personId);
+		addressBook.setName(addressBookDTO.name);
+		addressBook.setAddress(addressBookDTO.address);
+		return addressBookData.save(addressBook);
 	}
 
 	@Override
 	public void deleteAddressBookData(int personId) {
 		// TODO Auto-generated method stub
-		addressBookList.remove(personId - 1);
+		AddressBookData addressData = this.getAddressBookDataById(personId);
+		addressBookData.delete(addressData);
 	}
 }
