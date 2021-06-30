@@ -3,6 +3,9 @@ package com.example.AddressBookSpringApp.DTO;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
+import lombok.Data;
+
+@Data
 public class AddressBookDTO {
 
 	
@@ -13,17 +16,21 @@ public class AddressBookDTO {
 	@Pattern(regexp = "^[A-Za-z,.0-9]{3,}$",message = "Address is Invalid!!! ")
 	@NotEmpty(message = "Address cannot be null")
 	public String address;
+	
+	@Pattern(regexp = "^[9][1][ ][6-9][0-9]{9}$", message = "PhoneNo is Invalid")
+	@NotEmpty(message = "PhoneNo cannot be null")
+	public String phoneNumber;
+	
+	@NotEmpty(message = "City cannot be null")
+	public String city;
+	
+	@NotEmpty(message = "State cannot be null")
+	public String state;
+	
+	@NotEmpty(message = "zipCode cannot be null")
+	public String zipCode;
 
 	
 
-	public AddressBookDTO(String name, String address) {
-		super();
-		this.name = name;
-		this.address = address;
-	}
-
-	@Override
-	public String toString() {
-		return "AddressBookDTO [name=" + name + ", address=" + address + "]";
-	}
+	
 }

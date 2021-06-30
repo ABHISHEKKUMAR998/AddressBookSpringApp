@@ -10,9 +10,11 @@ import com.example.AddressBookSpringApp.DTO.AddressBookDTO;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "AddressBook")
+@NoArgsConstructor
  public @Data class AddressBookData {
 
 	 @Id
@@ -20,12 +22,24 @@ import lombok.Data;
 	private int addressBookId;
 	private String name;
 	private String address;
+	private String phoneNumber;
+	private String city;
+	private String state;
+	private String zipCode;
 
-	public AddressBookData( AddressBookDTO addressBookDTO) {
+	
+	public AddressBookData(AddressBookDTO addressBookDTO) {
+		this.updateAddressBookData(addressBookDTO);
+	}
 
-		super();
+	public void updateAddressBookData(AddressBookDTO addressBookDTO) {
 		this.name = addressBookDTO.name;
 		this.address = addressBookDTO.address;
+		this.phoneNumber = addressBookDTO.phoneNumber;
+		this.city = addressBookDTO.city;
+		this.state = addressBookDTO.state;
+		this.zipCode = addressBookDTO.zipCode;
+		
 	}
 
 }

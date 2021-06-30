@@ -33,7 +33,7 @@ public class AddressBookService implements IAddressBookService {
 
 	@Override
 	public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO) {
-		AddressBookData addressData =	new AddressBookData( addressBookDTO);
+		AddressBookData addressData =	new AddressBookData(addressBookDTO);
 		log.debug("Address Data",addressData.toString());
 			return addressBookData.save(addressData);
 	}
@@ -41,8 +41,7 @@ public class AddressBookService implements IAddressBookService {
 	@Override
 	public AddressBookData updateAddressBookData(int personId, AddressBookDTO addressBookDTO) {
 		AddressBookData addressBook = this.getAddressBookDataById(personId);
-		addressBook.setName(addressBookDTO.name);
-		addressBook.setAddress(addressBookDTO.address);
+		addressBook.updateAddressBookData(addressBookDTO);
 		return addressBookData.save(addressBook);
 	}
 
