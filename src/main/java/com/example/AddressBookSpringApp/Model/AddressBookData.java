@@ -20,12 +20,12 @@ import lombok.NoArgsConstructor;
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.AUTO)
 	private int addressBookId;
-	private String name;
+	private String fullName;
 	private String address;
 	private String phoneNumber;
 	private String city;
 	private String state;
-	private String zipCode;
+	private String zip;
 
 	
 	public AddressBookData(AddressBookDTO addressBookDTO) {
@@ -33,12 +33,12 @@ import lombok.NoArgsConstructor;
 	}
 
 	public void updateAddressBookData(AddressBookDTO addressBookDTO) {
-		this.name = addressBookDTO.name;
+		this.fullName = addressBookDTO.fullName;
 		this.address = addressBookDTO.address;
 		this.phoneNumber = addressBookDTO.phoneNumber;
 		this.city = addressBookDTO.city;
 		this.state = addressBookDTO.state;
-		this.zipCode = addressBookDTO.zipCode;
+		this.zip = addressBookDTO.zip;
 		
 	}
 

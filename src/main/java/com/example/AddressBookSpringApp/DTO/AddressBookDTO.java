@@ -4,33 +4,41 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import lombok.Data;
+import lombok.ToString;
 
-@Data
-public class AddressBookDTO {
+
+public  @ToString class AddressBookDTO {
 
 	
 	@Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$", message="Address Book Name is Invalid")
-	@NotEmpty(message="Address Book name cannot be null ")
-	public String name;
+	public String fullName;
 	
 	@Pattern(regexp = "^[A-Za-z,.0-9]{3,}$",message = "Address is Invalid!!! ")
-	@NotEmpty(message = "Address cannot be null")
 	public String address;
 	
 	@Pattern(regexp = "^[9][1][ ][6-9][0-9]{9}$", message = "PhoneNo is Invalid")
-	@NotEmpty(message = "PhoneNo cannot be null")
 	public String phoneNumber;
 	
-	@NotEmpty(message = "City cannot be null")
 	public String city;
-	
-	@NotEmpty(message = "State cannot be null")
 	public String state;
+	public String zip;
 	
-	@NotEmpty(message = "zipCode cannot be null")
-	public String zipCode;
+	public AddressBookDTO(){
 
-	
+	}
 
+
+	public AddressBookDTO(
+			String fullName,
+			String address,
+		    String phoneNumber,
+			String city, String state, String zipCode) {
+		this.fullName = fullName;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+	}
 	
 }
